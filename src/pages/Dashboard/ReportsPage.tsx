@@ -1,6 +1,5 @@
-
-import { ReportsTable } from "../components/Dashboard/ReportsTable";
-import { useReports } from "../hooks/report/useReports";
+import { ReportsTable } from "../../components/Dashboard/ReportsTable";
+import { useReports } from "../../hooks/report/useReports";
 
 export const DashboardReports = () => {
     const { reports, deleteDonation, reportRevised } = useReports();

@@ -1,8 +1,8 @@
 import { useState } from "react";
-import type { User } from "../domain/interfaces/User";
-import { UserForm } from "../components/Dashboard/UserForm";
-import { useAuthStore } from "../store/AuthStore";
-import { Table } from "../components/Table";
+import type { User } from "../../domain/interfaces/User";
+import { UserForm } from "../../components/Dashboard/UserForm";
+import { useAuthStore } from "../../store/AuthStore";
+import { Table } from "../../components/Table";
 
 export const DashboardUser = () => {
   const [modalOpen, setModalOpen] = useState(false);

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import type { Category } from "../domain/interfaces/Category";
+import type { Category } from "../../domain/interfaces/Category";
 
-import { CategoryForm } from "../components/category/CategoryForm";
-import { Table } from "../components/Table";
-import { useCategoryStore } from "../store/CategoryStore";
-import { useToast } from "../contexts/ToastContext";
+import { CategoryForm } from "../../components/category/CategoryForm";
+import { Table } from "../../components/Table";
+import { useCategoryStore } from "../../store/CategoryStore";
+import { useToast } from "../../contexts/ToastContext";
 
 export const DashboardCategory = () => {
   const { categories, fetchCategories, deleteCategory } = useCategoryStore();

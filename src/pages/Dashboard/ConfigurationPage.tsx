@@ -1,5 +1,5 @@
-import { EditProfile } from "../components/Dashboard/EditProfile"
-import { useAuthStore } from "../store/AuthStore"
+import { EditProfile } from "../../components/Dashboard/EditProfile"
+import { useAuthStore } from "../../store/AuthStore"
 
 export const DashboardConfiguration = () => {
 

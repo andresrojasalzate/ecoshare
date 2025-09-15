@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { Table } from "../components/Table";
-import type { Donation } from "../domain/interfaces/Donation";
-import { useDonationStore } from "../store/DonationStore";
-import { useCategoryStore } from "../store/CategoryStore";
-import { useAuthStore } from "../store/AuthStore";
-import { formatISODate } from "../utils/formatISODate";
+import { Table } from "../../components/Table";
+import type { Donation } from "../../domain/interfaces/Donation";
+import { useDonationStore } from "../../store/DonationStore";
+import { useCategoryStore } from "../../store/CategoryStore";
+import { useAuthStore } from "../../store/AuthStore";
+import { formatISODate } from "../../utils/formatISODate";
 
 export const DashboardMyDonations = () => {
   const { donationPagination, fetchDonations } = useDonationStore();

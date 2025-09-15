@@ -2,28 +2,28 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"; // Im
 import { MainLayout } from "../layouts/MainLayout";
 import { MainPage } from "../pages/MainPage";
 import { NotFound } from "../pages/NotFound";
-import { DonationDetailsPage } from "../pages/DonationDetailsPage";
+import { DonationDetailsPage } from "../pages/Donations/DetailsPage";
 
 import ProfileCreationPage from "../pages/CreateProfilePage";
 
 import CategoryPage from "../pages/CategoryPage";
-import { DonationSearchPage } from "../pages/DonationSearchPage";
+import { DonationSearchPage } from "../pages/Donations/SearchPage";
 
 import { DashboardLayout } from "../layouts/DashboardLayout";
-import { DashboardHome } from "../pages/DashboardHomePage";
-import { DashboardChatPage } from "../pages/DashboardChatPage";
-import { DashboardCategory } from "../pages/DashboardCategoryPage";
-import { DashboardDonationsPage } from "../pages/DashboardDonatiosPage";
-import { DashboardMyDonations } from "../pages/DashboardMyDonations";
-import { DashboardRecievedDonations } from "../pages/DashboardRecievedDonations";
-import { DashboardUser } from "../pages/DashboardUsersPage";
-import { DashboardReports } from "../pages/DashboardReportsPage";
-import { DashboardConfiguration } from "../pages/DashboardConfigurationPage";
+import { DashboardHome } from "../pages/Dashboard/HomePage";
+import { DashboardChatPage } from "../pages/Dashboard/ChatPage";
+import { DashboardCategory } from "../pages/Dashboard/CategoryPage";
+import { DashboardDonationsPage } from "../pages/Dashboard/DonatiosPage";
+import { DashboardMyDonations } from "../pages/Dashboard/MyDonations";
+import { DashboardRecievedDonations } from "../pages/Dashboard/RecievedDonations";
+import { DashboardUser } from "../pages/Dashboard/UsersPage";
+import { DashboardReports } from "../pages/Dashboard/ReportsPage";
+import { DashboardConfiguration } from "../pages/Dashboard/ConfigurationPage";
 
 import type { JSX } from "react";
 import { useAuthStore } from "../store/AuthStore"; // Importa el store de autenticación
 import LoginPage from "../pages/LoginPage";
-import { DashboardRequestedDonations } from "../pages/DashboardRequestedDonations";
+import { DashboardRequestedDonations } from "../pages/Dashboard/RequestedDonations";
 import { ScrollToTop } from "../components/ScrollOnTop";
 import { UserProfile } from "../pages/UserProfile";
 

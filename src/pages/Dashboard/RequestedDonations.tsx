@@ -1,21 +1,24 @@
 import { useEffect } from "react";
-import { Table } from "../components/Table";
+import { Table } from "../../components/Table";
+import type { Donation } from "../../domain/interfaces/Donation";
+import { useDonationStore } from "../../store/DonationStore";
+import { useCategoryStore } from "../../store/CategoryStore";
+import { useDonationTransactionStore } from "../../store/DonationTransactionStore";
+import { useAuthStore } from "../../store/AuthStore";
 
-import { useDonationStore } from "../store/DonationStore";
-import { useCategoryStore } from "../store/CategoryStore";
-import { useDonationTransactionStore } from "../store/DonationTransactionStore";
-import { useAuthStore } from "../store/AuthStore";
-import { useToast } from "../contexts/ToastContext";
-import { formatISODate } from "../utils/formatISODate";
+import { useDonationTransaction } from "../../hooks/donation/useDonationTransaction";
+import { formatISODate } from "../../utils/formatISODate";
+import { Gift } from "lucide-react";
 
-export const DashboardRecievedDonations = () => {
+export const DashboardRequestedDonations = () => {
   const { donationPagination, fetchDonations } = useDonationStore();
   const { categories, fetchCategories } = useCategoryStore();
   const { transactions, fetchTransactions } = useDonationTransactionStore();
 
+  const { handleUpdateTransaction, handleDeleteTransaction } =
+    useDonationTransaction();
+
   const { user } = useAuthStore();
-  const { showToast } = useToast();
-  const { deleteTransaction } = useDonationTransactionStore();
 
   useEffect(() => {
     fetchTransactions();
@@ -29,6 +32,19 @@ export const DashboardRecievedDonations = () => {
     fetchCategories();
   }, [fetchCategories]);
 
+  const handleDonated = async (donation: Donation) => {
+    const transactionToUpdate = transactions.find(
+      (transaction) => Number(transaction.donationId) === Number(donation.id)
+    );
+    if (transactionToUpdate) {
+      const id = String(transactionToUpdate.id);
+      await handleUpdateTransaction(id, {
+        status: "Donated",
+        donationId: transactionToUpdate.donationId,
+      });
+    }
+  };
+
   const handleDelete = async (id: string | number) => {
     if (!window.confirm("Are you sure you want to delete this transaction?")) {
       return;
@@ -37,30 +53,21 @@ export const DashboardRecievedDonations = () => {
       (transaction) => Number(transaction.donationId) === Number(id)
     );
     if (transactionToDelete != undefined) {
-      const resp = await deleteTransaction(String(transactionToDelete.id));
-      if (resp) {
-        showToast("Transaction deleted successfully", "success");
-      }
-    } else {
-      showToast("No transaction found with ID: " + id, "error");
+      await handleDeleteTransaction(String(transactionToDelete.id));
     }
   };
-
-  const myDonationTransactionSaved = user
-    ? transactions.filter(
-        (transaction) => Number(transaction.receiverId) === Number(user.id)
-      )
-    : [];
 
   return (
     <div className="container mx-auto">
       <div className="px-4 pt-8">
-        <h1 className="text-2xl font-bold mb-2">Donations you have recieved</h1>
-        <p className="text-sm text-gray-600">View all recieved items here.</p>
+        <h1 className="text-2xl font-bold mb-2">
+          Donations you have requested
+        </h1>
+        <p className="text-sm text-gray-600">View all requested items here.</p>
       </div>
 
       <p className="px-4 pt-8 text-xl">
-        <strong>Donations pending receipt:</strong>
+        <strong>Requested Donations:</strong>
       </p>
 
       <Table
@@ -73,11 +80,7 @@ export const DashboardRecievedDonations = () => {
           { key: "date", label: "Date" },
         ]}
         dataTable={donationPagination.data
-          .filter((donation) => {
-            return myDonationTransactionSaved.some(
-              (transaction) => transaction.donationId === donation.id
-            );
-          })
+          .filter((donation) => user && donation.donorId === Number(user.id))
           .filter((donation) => donation.status === "Reserved")
           .map((donation) => ({
             id: donation.id,
@@ -93,11 +96,18 @@ export const DashboardRecievedDonations = () => {
           }))}
         onDelete={handleDelete}
         showEditButton={false}
+        customButtons={[
+          {
+            label: "Donated",
+            className: "btn-primary",
+            icon: <Gift />,
+            onClick: handleDonated,
+          },
+        ]}
       />
-
-      <div className="px-4 pt-8 text-xl">
-        <strong>My Received Donations:</strong>
-      </div>
+      <p className="px-4 pt-8 text-xl">
+        <strong>Donations completed:</strong>
+      </p>
 
       <Table
         headers={[
@@ -109,11 +119,7 @@ export const DashboardRecievedDonations = () => {
           { key: "date", label: "Date" },
         ]}
         dataTable={donationPagination.data
-          .filter((donation) => {
-            return myDonationTransactionSaved.some(
-              (transaction) => transaction.donationId === donation.id
-            );
-          })
+          .filter((donation) => user && donation.donorId === Number(user.id))
           .filter((donation) => donation.status === "Donated")
           .map((donation) => ({
             id: donation.id,
@@ -123,11 +129,10 @@ export const DashboardRecievedDonations = () => {
               categories.find((cat) => cat.id === donation.categoryId)?.title ||
               "Unknown",
             status: donation.status,
-            date: donation.createdAt
-              ? formatISODate("" + donation.createdAt)
+            date: donation.updatedAt
+              ? formatISODate("" + donation.updatedAt)
               : undefined,
           }))}
-        onDelete={handleDelete}
         showEditButton={false}
         showDeleteButton={false}
       />

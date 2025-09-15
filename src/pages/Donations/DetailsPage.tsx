@@ -1,14 +1,14 @@
 // src/pages/DonationDetailsPage.tsx
-import { DonationInfo } from "../components/Donation/DonationDetails/DonationInfo";
-import { AditionalInformation } from "../components/Donation/DonationDetails/AditionalInformation";
+import { DonationInfo } from "../../components/Donation/DonationDetails/DonationInfo";
+import { AditionalInformation } from "../../components/Donation/DonationDetails/AditionalInformation";
 import { useParams } from "react-router-dom";
-import { ContactDonor } from "../components/donor/ContatDonor";
-import { AboutDonor } from "../components/donor/AboutDonor";
+import { ContactDonor } from "../../components/donor/ContatDonor";
+import { AboutDonor } from "../../components/donor/AboutDonor";
 import { useEffect, useState } from "react";
-import { ReportForm } from "../components/Donation/DonationDetails/ReportForm";
-import { useDonationStore } from "../store/DonationStore";
-import { getAddressFromCoords } from "../utils/getAddressFromCoords";
-import { useAuthStore } from "../store/AuthStore";
+import { ReportForm } from "../../components/Donation/DonationDetails/ReportForm";
+import { useDonationStore } from "../../store/DonationStore";
+import { getAddressFromCoords } from "../../utils/getAddressFromCoords";
+import { useAuthStore } from "../../store/AuthStore";
 
 export const DonationDetailsPage = () => {
   const [reportFormOpen, setReportFormOpen] = useState(false);

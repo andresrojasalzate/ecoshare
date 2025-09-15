@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { MainCard } from "../components/Main/MainCard";
-import { CardDonation } from "../components/Donation/CardDonation";
-import { useDonationStore } from "../store/DonationStore";
-import { useCategoryStore } from "../store/CategoryStore";
+import { MainCard } from "../../components/Main/MainCard";
+import { CardDonation } from "../../components/Donation/CardDonation";
+import { useDonationStore } from "../../store/DonationStore";
+import { useCategoryStore } from "../../store/CategoryStore";
 
-import type { Donation } from "../domain/interfaces/Donation";
-import { getCurrentLocation } from "../utils/getCurrenLocation";
-import { getDistanceInKm } from "../utils/getDistanceInKm";
+import type { Donation } from "../../domain/interfaces/Donation";
+import { getCurrentLocation } from "../../utils/getCurrenLocation";
+import { getDistanceInKm } from "../../utils/getDistanceInKm";
 
 export const DonationSearchPage = () => {
   const { donationPagination } = useDonationStore();

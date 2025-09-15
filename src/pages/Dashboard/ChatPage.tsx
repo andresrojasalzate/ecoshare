@@ -1,12 +1,12 @@
 // src/pages/DashboardChatPage.tsx
 import { useState, useEffect, useRef } from "react";
 import { ArrowDown, ArrowUp, SendHorizonal } from "lucide-react";
-import { useChatMessageStore } from "../store/ChatMessageStore";
-import { useAuthStore } from "../store/AuthStore";
-import { socket } from "../App";
-import { useChatStore } from "../store/ChatStore";
+import { useChatMessageStore } from "../../store/ChatMessageStore";
+import { useAuthStore } from "../../store/AuthStore";
+import { socket } from "../../App";
+import { useChatStore } from "../../store/ChatStore";
 import { useLocation, useNavigate } from "react-router-dom";
-import type { SendMessage } from "../domain/interfaces/ChatMessage";
+import type { SendMessage } from "../../domain/interfaces/ChatMessage";
 
 export const DashboardChatPage = () => {
   const navigate = useNavigate();

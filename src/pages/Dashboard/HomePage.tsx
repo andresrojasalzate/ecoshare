@@ -1,8 +1,8 @@
-import { ReportsTable } from "../components/Dashboard/ReportTable";
-import { Stats } from "../components/Dashboard/Stats";
-import { UsersTable } from "../components/Dashboard/UserTable";
-import { DonationDone } from "../components/Dashboard/DonationsDone";
-import { DonationRecibed } from "../components/Dashboard/DonationRecibed";
+import { ReportsTable } from "../../components/Dashboard/ReportTable";
+import { Stats } from "../../components/Dashboard/Stats";
+import { UsersTable } from "../../components/Dashboard/UserTable";
+import { DonationDone } from "../../components/Dashboard/DonationsDone";
+import { DonationRecibed } from "../../components/Dashboard/DonationRecibed";
 import {
   Users,
   HandHeart,
@@ -12,10 +12,10 @@ import {
   Bookmark,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useDonationStore } from "../store/DonationStore";
-import { useAuthStore } from "../store/AuthStore";
+import { useDonationStore } from "../../store/DonationStore";
+import { useAuthStore } from "../../store/AuthStore";
 
-import type { Donation } from "../domain/interfaces/Donation";
+import type { Donation } from "../../domain/interfaces/Donation";
 
 type AdminStats = {
   activeDonations: number;
